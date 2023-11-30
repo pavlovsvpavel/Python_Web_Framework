@@ -1,6 +1,7 @@
 from django.db import models
 
-from Python_Web_Framework.main_app.mixins import TimeStampModel,  MonthlyBill
+from Python_Web_Framework.main_app.managers import CustomerMonthlyBillManager, CustomerClientManager
+from Python_Web_Framework.main_app.mixins import TimeStampModel, MonthlyBill
 from Python_Web_Framework.main_app.validators import validate_char_field, validate_phone_number
 
 
@@ -105,6 +106,8 @@ class CustomerClient(TimeStampModel):
         related_name='customer_clients'
     )
 
+    objects = CustomerClientManager()
+
     def __str__(self):
         return self.family_name
 
@@ -115,6 +118,8 @@ class CustomerMonthlyBill(MonthlyBill):
         on_delete=models.CASCADE,
         related_name='customer_monthly_bills'
     )
+
+    objects = CustomerMonthlyBillManager()
 
 
 class CustomerClientMonthlyBill(MonthlyBill):
